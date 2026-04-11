@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import AnimatedSection from '@/components/AnimatedSection'
@@ -28,50 +29,72 @@ export default function Home() {
         {/* Glow background */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-rose/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-rose font-medium text-sm md:text-base mb-6 tracking-wide uppercase"
-          >
-            Community Manager & Graphiste Freelance
-          </motion.p>
+        <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-rose font-medium text-sm md:text-base mb-6 tracking-wide uppercase"
+            >
+              Community Manager & Graphiste Freelance
+            </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="heading-1 mb-6"
-          >
-            Développe ta visibilité et attire plus de clients grâce à une{' '}
-            <span className="text-gradient">stratégie social media</span> et des{' '}
-            <span className="text-gradient">visuels impactants</span>
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="heading-1 mb-6"
+            >
+              Développe ta visibilité et attire plus de clients grâce à une{' '}
+              <span className="text-gradient">stratégie social media</span> et des{' '}
+              <span className="text-gradient">visuels impactants</span>
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-text-secondary text-lg md:text-xl leading-relaxed mb-10 max-w-3xl mx-auto"
-          >
-            Je t&apos;accompagne dans la gestion complète de tes réseaux sociaux et la
-            création de ton identité visuelle pour transformer ton compte en véritable
-            outil de conversion.
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-text-secondary text-lg md:text-xl leading-relaxed mb-10"
+            >
+              Je t&apos;accompagne dans la gestion complète de tes réseaux sociaux et la
+              création de ton identité visuelle pour transformer ton compte en véritable
+              outil de conversion.
+            </motion.p>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
+              <Link href={siteConfig.contact.calendly} className="btn-primary">
+                Réserver un appel
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Me contacter
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Image hero */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden lg:block relative"
           >
-            <Link href={siteConfig.contact.calendly} className="btn-primary">
-              Réserver un appel
-            </Link>
-            <Link href="/contact" className="btn-secondary">
-              Me contacter
-            </Link>
+            <div className="relative rounded-3xl overflow-hidden border border-border-subtle glow">
+              <Image
+                src="/images/hero-phone.jpg"
+                alt="Stratégie social media"
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/60 via-transparent to-transparent" />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -154,6 +177,24 @@ export default function Home() {
               Ce que je propose
             </p>
             <h2 className="heading-2">Mes services</h2>
+          </AnimatedSection>
+
+          {/* Image décorative */}
+          <AnimatedSection className="mb-12">
+            <div className="relative rounded-2xl overflow-hidden h-48 md:h-64 border border-border-subtle">
+              <Image
+                src="/images/workspace.jpg"
+                alt="Espace de travail créatif"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-bg-secondary/80 via-bg-secondary/40 to-transparent" />
+              <div className="absolute inset-0 flex items-center px-8 md:px-12">
+                <p className="font-heading text-xl md:text-2xl font-semibold max-w-sm">
+                  Des solutions pensées pour <span className="text-gradient">ton succès</span>
+                </p>
+              </div>
+            </div>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 gap-8">

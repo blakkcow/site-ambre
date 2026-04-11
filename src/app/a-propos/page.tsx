@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import AnimatedSection from '@/components/AnimatedSection'
@@ -43,33 +44,58 @@ export default function APropos() {
       <section className="section-padding pt-24 md:pt-32 relative overflow-hidden">
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-rose/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container-custom relative z-10">
-          <div className="max-w-3xl">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-rose font-medium text-sm uppercase tracking-wide mb-4"
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-rose font-medium text-sm uppercase tracking-wide mb-4"
+              >
+                À propos
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="heading-1 mb-6"
+              >
+                Hello, moi c&apos;est{' '}
+                <span className="text-gradient">Ambre</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-text-secondary text-lg leading-relaxed"
+              >
+                Community manager et créatrice de contenu. Je me suis spécialisée dans
+                la gestion de réseaux sociaux et la création de visuels pour aider les
+                marques et créateurs à développer leur présence en ligne.
+              </motion.p>
+            </div>
+
+            {/* TODO: Remplacer par une vraie photo d'Ambre */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:block"
             >
-              À propos
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="heading-1 mb-6"
-            >
-              Hello, moi c&apos;est{' '}
-              <span className="text-gradient">Ambre</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-text-secondary text-lg leading-relaxed"
-            >
-              Community manager et créatrice de contenu. Je me suis spécialisée dans
-              la gestion de réseaux sociaux et la création de visuels pour aider les
-              marques et créateurs à développer leur présence en ligne.
-            </motion.p>
+              <div className="relative rounded-3xl overflow-hidden border border-border-subtle glow aspect-[4/5]">
+                <Image
+                  src="/images/creative-desk.jpg"
+                  alt="Espace créatif"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/50 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-xs text-text-muted bg-bg-primary/60 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block">
+                    [ Photo d&apos;Ambre à ajouter ]
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -146,8 +172,17 @@ export default function APropos() {
       </section>
 
       {/* ======== CTA ======== */}
-      <section className="section-padding">
-        <div className="container-custom text-center max-w-2xl mx-auto">
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/branding.jpg"
+            alt="Branding et identité visuelle"
+            fill
+            className="object-cover opacity-10"
+          />
+          <div className="absolute inset-0 bg-bg-primary/80" />
+        </div>
+        <div className="container-custom text-center max-w-2xl mx-auto relative z-10">
           <AnimatedSection>
             <h2 className="heading-2 mb-4">
               Envie de <span className="text-gradient">collaborer</span> ?
