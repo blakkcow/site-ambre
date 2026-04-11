@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/AnimatedSection'
 
@@ -134,8 +135,17 @@ export default function Portfolio() {
       </section>
 
       {/* ======== CTA ======== */}
-      <section className="section-padding bg-bg-secondary">
-        <div className="container-custom text-center max-w-2xl mx-auto">
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/branding.jpg"
+            alt="Branding et identité visuelle"
+            fill
+            className="object-cover opacity-10"
+          />
+          <div className="absolute inset-0 bg-bg-primary/80" />
+        </div>
+        <div className="container-custom text-center max-w-2xl mx-auto relative z-10">
           <AnimatedSection>
             <h2 className="heading-2 mb-4">
               Un projet en tête ?

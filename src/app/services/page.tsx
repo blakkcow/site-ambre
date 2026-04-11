@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/AnimatedSection'
@@ -118,23 +117,6 @@ export default function Services() {
             Des services adaptés à{' '}
             <span className="text-gradient">tes besoins</span>
           </motion.h1>
-        </div>
-      </section>
-
-      {/* ======== Image transition ======== */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-0">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="relative rounded-2xl overflow-hidden h-40 md:h-56 border border-border-subtle">
-              <Image
-                src="/images/social-media.jpg"
-                alt="Stratégie digitale"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/70 via-bg-primary/30 to-bg-primary/70" />
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
