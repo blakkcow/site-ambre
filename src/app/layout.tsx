@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { ConvexClientProvider } from '@/providers/ConvexProvider'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -27,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body>
-        <Header />
-        <main className="min-h-screen pt-16 md:pt-20">{children}</main>
-        <Footer />
+        <ConvexClientProvider>
+          <Header />
+          <main className="min-h-screen pt-16 md:pt-20">{children}</main>
+          <Footer />
+        </ConvexClientProvider>
       </body>
     </html>
   )
