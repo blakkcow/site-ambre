@@ -18,8 +18,12 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
     try {
-      const { token } = await login({ password })
-      localStorage.setItem('admin_token', token)
+      const result = await login({ password })
+      if ('error' in result) {
+        setError(result.error)
+        return
+      }
+      localStorage.setItem('admin_token', result.token)
       router.push('/admin')
     } catch {
       setError('Mot de passe incorrect. Veuillez réessayer.')

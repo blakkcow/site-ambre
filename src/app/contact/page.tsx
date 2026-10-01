@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import AnimatedSection from '@/components/AnimatedSection'
 import { siteConfig } from '@/config/site'
@@ -272,23 +273,19 @@ export default function Contact() {
                   </div>
                 </a>
 
-                {/* Calendly */}
-                {siteConfig.contact.calendly !== '#' && (
-                  <a
-                    href={siteConfig.contact.calendly}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 card hover:border-rose/30 transition-colors group"
-                  >
-                    <div className="w-12 h-12 bg-rose/10 rounded-xl flex items-center justify-center text-rose text-xl flex-shrink-0 group-hover:bg-rose/20 transition-colors">
-                      📅
-                    </div>
-                    <div>
-                      <p className="text-xs text-text-muted uppercase tracking-wide mb-1">Appel découverte</p>
-                      <p className="text-white font-medium">Réserver un créneau</p>
-                    </div>
-                  </a>
-                )}
+                {/* Prise de rendez-vous en ligne */}
+                <Link
+                  href="/rendez-vous"
+                  className="flex items-center gap-4 card hover:border-rose/30 transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-rose/10 rounded-xl flex items-center justify-center text-rose text-xl flex-shrink-0 group-hover:bg-rose/20 transition-colors">
+                    📅
+                  </div>
+                  <div>
+                    <p className="text-xs text-text-muted uppercase tracking-wide mb-1">Appel découverte</p>
+                    <p className="text-white font-medium">Réserver un créneau</p>
+                  </div>
+                </Link>
 
                 {/* Note délai de réponse */}
                 <div className="bg-bg-secondary rounded-xl p-5 border border-border-subtle">
