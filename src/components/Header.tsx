@@ -1,14 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useMutation, useQuery } from 'convex/react'
+import { api } from '../../convex/_generated/api'
 import { motion, AnimatePresence } from 'framer-motion'
 import { siteConfig } from '@/config/site'
+import { useClientSession } from '@/lib/useClientSession'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+  const { user } = useClientSession()
+  const accountLabel = user ? user.name : 'Me connecter'
+
+  // Session admin : relue à chaque changement de page (la connexion admin redirige vers /admin)
+  const [adminToken, setAdminToken] = useState<string | null>(null)
+  useEffect(() => {
+    setAdminToken(localStorage.getItem('admin_token'))
+  }, [pathname])
+  const isAdmin = useQuery(api.admin.verifySession, adminToken ? { token: adminToken } : 'skip') === true
+  const adminLogoutMutation = useMutation(api.admin.logout)
+
+  // Retour à l'accueil par navigation complète : les pages admin redirigent vers /admin/login
+  // dès que la session est invalidée, un router.push('/') pourrait se faire doubler
+  const handleAdminLogout = async () => {
+    setIsOpen(false)
+    if (adminToken) await adminLogoutMutation({ token: adminToken }).catch(() => {})
+    localStorage.removeItem('admin_token')
+    window.location.assign('/')
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-bg-primary/80 backdrop-blur-lg border-b border-border-subtle">
@@ -34,10 +56,16 @@ export default function Header() {
           ))}
         </ul>
 
-        {/* CTA desktop */}
-        <Link href="/contact" className="hidden md:inline-flex btn-primary text-sm px-6 py-2.5">
-          Me contacter
-        </Link>
+        {/* CTA desktop — déconnexion admin, sinon espace client (redirige vers la connexion si non connecté) */}
+        {isAdmin ? (
+          <button onClick={handleAdminLogout} className="hidden md:inline-flex btn-primary text-sm px-6 py-2.5">
+            Déconnexion
+          </button>
+        ) : (
+          <Link href="/compte" className="hidden md:inline-flex btn-primary text-sm px-6 py-2.5 max-w-[220px]">
+            <span className="truncate">{accountLabel}</span>
+          </Link>
+        )}
 
         {/* Burger mobile */}
         <button
@@ -84,13 +112,19 @@ export default function Header() {
                 </li>
               ))}
               <li className="pt-3">
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-primary w-full text-center"
-                >
-                  Me contacter
-                </Link>
+                {isAdmin ? (
+                  <button onClick={handleAdminLogout} className="btn-primary w-full text-center">
+                    Déconnexion
+                  </button>
+                ) : (
+                  <Link
+                    href="/compte"
+                    onClick={() => setIsOpen(false)}
+                    className="btn-primary w-full text-center"
+                  >
+                    {accountLabel}
+                  </Link>
+                )}
               </li>
             </ul>
           </motion.div>

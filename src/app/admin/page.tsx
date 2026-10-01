@@ -26,7 +26,6 @@ export default function AdminPage() {
   const generateUploadUrl = useMutation(api.portfolioItems.generateUploadUrl)
   const addItem = useMutation(api.portfolioItems.add)
   const removeItem = useMutation(api.portfolioItems.remove)
-  const logoutMutation = useMutation(api.admin.logout)
 
   const isAuthenticated = useQuery(
     api.admin.verifySession,
@@ -104,12 +103,6 @@ export default function AdminPage() {
     }
   }
 
-  const handleLogout = async () => {
-    if (token) await logoutMutation({ token })
-    localStorage.removeItem('admin_token')
-    router.push('/admin/login')
-  }
-
   if (!token || isAuthenticated === undefined) {
     return (
       <div className="min-h-screen bg-bg-primary flex items-center justify-center">
@@ -128,16 +121,10 @@ export default function AdminPage() {
             <h1 className="text-white font-heading text-xl">Espace Admin — Ambre</h1>
           </div>
           <div className="flex items-center gap-4">
-            <a href="/portfolio" target="_blank"
+            <a href="/admin/crm"
               className="text-text-secondary hover:text-rose text-sm transition-colors">
-              Voir le site →
+              CRM — Clients &amp; RDV
             </a>
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 border border-border-subtle rounded-lg text-text-secondary
-                hover:border-rose/40 hover:text-rose text-sm transition-all">
-              Déconnexion
-            </button>
           </div>
         </div>
       </header>
